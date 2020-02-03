@@ -1,5 +1,6 @@
 HELP.md
 target/
+log/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
 !**/src/test/**
@@ -19,6 +20,14 @@ target/
 *.iml
 *.ipr
 
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Mac
+.DS_Store
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
@@ -29,3 +38,6 @@ build/
 
 ### VS Code ###
 .vscode/
+data/
+/bin/
+/uploadedFiles/**

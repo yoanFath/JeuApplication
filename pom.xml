@@ -11,7 +11,7 @@
 	<groupId>com.example</groupId>
 	<artifactId>FilmApplication</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>FilmApplication</name>
+	<name>JeuApplication</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -43,6 +43,11 @@
 					<artifactId>junit-vintage-engine</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+		<!-- thymeleaf -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 	</dependencies>
 

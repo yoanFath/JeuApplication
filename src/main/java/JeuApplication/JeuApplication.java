@@ -1,13 +1,13 @@
-package FilmApplication;
+package JeuApplication;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class FilmApplication {
+public class JeuApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FilmApplication.class, args);
+		SpringApplication.run(JeuApplication.class, args);
 	}
 
 }

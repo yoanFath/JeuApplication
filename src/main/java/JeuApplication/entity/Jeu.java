@@ -9,10 +9,21 @@ public class Jeu {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "serial")
     private Long id;
 
     @Basic
     private String nom_jeu;
+
+    @Basic
+    private int age_minimum;
+
+    @Basic
+    private int nombre_joueurs_minimum;
+
+    @Basic
+    private int nombre_joueurs_maximum;
+
 
     @ManyToOne(targetEntity=Editeur.class)
     @JoinColumn(name = "id_editeur", referencedColumnName = "id", nullable = false)
@@ -88,5 +99,29 @@ public class Jeu {
 
     public void setListeNote(Collection<Note> listeNote) {
         this.listeNote = listeNote;
+    }
+
+    public int getAge_minimum() {
+        return age_minimum;
+    }
+
+    public void setAge_minimum(int age_minimum) {
+        this.age_minimum = age_minimum;
+    }
+
+    public int getNombre_joueurs_minimum() {
+        return nombre_joueurs_minimum;
+    }
+
+    public void setNombre_joueurs_minimum(int nombre_joueurs_minimum) {
+        this.nombre_joueurs_minimum = nombre_joueurs_minimum;
+    }
+
+    public int getNombre_joueurs_maximum() {
+        return nombre_joueurs_maximum;
+    }
+
+    public void setNombre_joueurs_maximum(int nombre_joueurs_maximum) {
+        this.nombre_joueurs_maximum = nombre_joueurs_maximum;
     }
 }

@@ -5,13 +5,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class JeuController {
-    @GetMapping("/jeu")
-    public String registration(Model model) {
-        model.addAttribute("message", "coucou");
+public class EditeurController {
 
-        return "jeu";
+    @GetMapping("/editeur")
+    public String getEditeurs(Model model) {
+
+        return "editeur";
     }
-
-
 }

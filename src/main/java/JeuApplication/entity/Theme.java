@@ -1,24 +1,22 @@
 package JeuApplication.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
 @Table(name = "theme_jeu")
-public class Theme {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(columnDefinition = "serial")
-    private Long id;
+public class Theme extends SimpleEntity{
 
     @Basic
     private String nom_theme;
 
     @JsonBackReference
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "theme")
+    @Fetch(value= FetchMode.SELECT)
     private Collection<Jeu> listeJeu;
 
     public Collection<Jeu> getListeJeu() {
@@ -27,14 +25,6 @@ public class Theme {
 
     public void setListeJeu(Collection<Jeu> listeJeu) {
         this.listeJeu = listeJeu;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getNom_theme() {

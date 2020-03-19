@@ -9,7 +9,7 @@ public class GenreController {
 
     @GetMapping("/genre")
     public String getGenres(Model model) {
-
-        return "genre";
+        model.addAttribute("entite", "genre");
+        return "simpleEntity";
     }
 }

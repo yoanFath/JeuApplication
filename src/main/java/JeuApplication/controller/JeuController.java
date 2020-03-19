@@ -10,7 +10,7 @@ public class JeuController {
     public String registration(Model model) {
         model.addAttribute("message", "coucou");
 
-        return "jeu";
+        return "jeu/all";
     }
 
 

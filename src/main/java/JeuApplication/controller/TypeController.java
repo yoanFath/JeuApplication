@@ -9,7 +9,7 @@ public class TypeController {
 
     @GetMapping("/type")
     public String getTypes(Model model) {
-
-        return "type";
+        model.addAttribute("entite", "type");
+        return "simpleEntity";
     }
 }

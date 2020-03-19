@@ -9,7 +9,7 @@ public class ThemeController {
 
     @GetMapping("/theme")
     public String getThemes(Model model) {
-
-        return "theme";
+        model.addAttribute("entite", "theme");
+        return "simpleEntity";
     }
 }

@@ -9,7 +9,7 @@ public class EditeurController {
 
     @GetMapping("/editeur")
     public String getEditeurs(Model model) {
-
-        return "editeur";
+        model.addAttribute("entite", "editeur");
+        return "simpleEntity";
     }
 }

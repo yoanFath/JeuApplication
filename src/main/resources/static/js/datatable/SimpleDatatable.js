@@ -18,10 +18,20 @@ function creerSimpleDatatable(lien){
                 }},
             {"data": function(data){
                     // TODO appel ajax on click avec une image ou jsp
-                    return "appeler api/"+ lien +"/delete/" + data.id;
+                    //return "appeler api/"+ lien +"/delete/" + data.id;
+                    return "<input type='button' onclick='deleteEntity(" + lien + "," + data.id + ")'>"
                 }}
 
         ]
     });
+}
 
+function deleteEntity(lien, id) {
+    $.ajax({
+        type:"POST",
+        url: "http://localhost:8080/api/" + lien + "/delete/" + id,
+        success:function (responsedata) {
+            alert(responsedata);
+        }
+    })
 }

@@ -18,23 +18,6 @@ public abstract class SimpleController<T extends SimpleEntity> {
         this.service = service;
     }
 
-    @GetMapping(value = {"get/{sId}"})
-    public ResponseEntity getEntity(@PathVariable String sId){
-        try{
-            Long id = Long.parseLong(sId);
-            T o = service.findById(id);
-            System.out.println(o);
-            if(o == null){
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Entité non trouvé, vérifiez que l'id correspond");
-            }
-
-            return ResponseEntity.ok(o);
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Seul l'id doit etre envoyé dans le body.");
-
-        }
-    }
-
     @PostMapping(value = {"ajouter"})
     public ResponseEntity addEntity(@RequestBody String name){
         T newEntity = setName(name,createEntity());

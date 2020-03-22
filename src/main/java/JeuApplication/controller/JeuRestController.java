@@ -92,4 +92,21 @@ public class JeuRestController {
             return ResponseEntity.ok("Jeu ajouté");
         }
     }
+
+    @GetMapping(value = {"get/{sId}"})
+    public ResponseEntity getJeu(@PathVariable String sId){
+        try{
+            Long id = Long.parseLong(sId);
+            Jeu o = jeuService.findById(id);
+
+            if(o == null){
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Jeu non trouvé, vérifiez que l'id correspond");
+            }
+
+            return ResponseEntity.ok(o);
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Seul l'id doit etre envoyé dans le body.");
+
+        }
+    }
 }

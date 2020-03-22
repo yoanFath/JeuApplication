@@ -13,7 +13,7 @@ function creerSimpleDatatable(lien){
         "columns": [
             {"data": "nom_"+lien},
             {"data": function(data){
-                    return "<button type='button' onclick='updateEntity(" + '"' + lien + '"' + "," + data.id + ",\"PROUT\"" +")'>Modifier</button>"
+                    return "<a class='button' href='/"+ lien +"/get/" + data.id + "'>Modifier</a>"
                 }},
             {"data": function(data){
                     return "<button type='button' class='red' onclick='deleteEntity(" + '"' + lien + '"' + "," + data.id + ")'>Supprimer</button>"
@@ -26,13 +26,20 @@ function creerSimpleDatatable(lien){
 function updateEntity(lien, id, newName) {
     const url = '/api/' + lien + '/modifier/' + id;
     $('.alert').addClass('hidden');
-    $.post(url, newName, function() {
-        table.ajax.reload();
-        $('.alert-success').find('span').html('Votre modification a bien été sauvegardée');
-        $('.alert-success').removeClass('hidden');
-    }).fail(function() {
-        $('.alert-danger').find('span').html('Votre modification a échoué, veuillez réessayer');
-        $('.alert-danger').removeClass('hidden');
+    $.ajax({
+        url:url,
+        type:"POST",
+        data:newName,
+        contentType:"application/json; charset=utf-8",
+        success: function(){
+            table.ajax.reload();
+            $('.alert-success').find('span').html('Votre modification a bien été sauvegardée');
+            $('.alert-success').removeClass('hidden');
+        },
+        error: function(){
+            $('.alert-danger').find('span').html('Votre modification a échoué, veuillez réessayer');
+            $('.alert-danger').removeClass('hidden');
+        }
     });
 }
 

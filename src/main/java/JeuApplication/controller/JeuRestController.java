@@ -92,4 +92,48 @@ public class JeuRestController {
             return ResponseEntity.ok("Jeu ajouté");
         }
     }
+
+    @PostMapping(value = {"modifier/{id}"})
+    public ResponseEntity modifierJeu(@RequestBody JeuDAO jeudao,@PathVariable Long id){
+        Jeu jeu = jeuService.findById(id);
+
+        Type type = typeService.findById(jeudao.getTypeId());
+        Editeur editeur = editeurService.findById(jeudao.getEditeurId());
+        Theme theme = themeService.findById(jeudao.getThemeId());
+        Genre genre = genreService.findById(jeudao.getGenreId());
+
+        if (jeudao.getNom_jeu() == null || jeudao.getNom_jeu().length() == 0 || theme == null|| type == null ||
+                editeur== null || genre==null){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erreur dans le formulaire !");
+        }else{
+            jeu.setNom_jeu(jeudao.getNom_jeu());
+            jeu.setAge_minimum(jeudao.getAge_minimum());
+            jeu.setNombre_joueurs_minimum(jeudao.getNombre_joueurs_minimum());
+            jeu.setNombre_joueurs_maximum(jeudao.getNombre_joueurs_maximum());
+            jeu.setEditeur(editeur);
+            jeu.setType(type);
+            jeu.setTheme(theme);
+            jeu.setGenre(genre);
+
+            jeuService.save(jeu);
+            return ResponseEntity.ok("Jeu modifié");
+        }
+    }
+
+    @GetMapping(value = {"get/{sId}"})
+    public ResponseEntity getJeu(@PathVariable String sId){
+        try{
+            Long id = Long.parseLong(sId);
+            Jeu o = jeuService.findById(id);
+
+            if(o == null){
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Jeu non trouvé, vérifiez que l'id correspond");
+            }
+
+            return ResponseEntity.ok(o);
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Seul l'id doit etre envoyé dans le body.");
+
+        }
+    }
 }

@@ -15,12 +15,6 @@ $(function() {
         console.log(url, jeudao);
         $('.alert').addClass('hidden');
 
-        // $.post(url, request, function() {
-        //
-        // }).fail(function() {
-        //     $('.alert-danger').removeClass('hidden');
-        // });
-
         $.ajax({
             url:url,
             type:"POST",

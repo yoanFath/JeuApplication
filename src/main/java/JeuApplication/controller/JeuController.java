@@ -1,16 +1,12 @@
 package JeuApplication.controller;
 
+import JeuApplication.entity.Jeu;
+import JeuApplication.service.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import JeuApplication.dao.JeuDAO;
-import JeuApplication.entity.*;
-import JeuApplication.service.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class JeuController {
@@ -36,6 +32,18 @@ public class JeuController {
 
     @GetMapping("/jeu/ajouter")
     public String ajouterJeu(Model model) {
+        model.addAttribute("types", typeService.findAll());
+        model.addAttribute("genres", genreService.findAll());
+        model.addAttribute("themes", themeService.findAll());
+        model.addAttribute("editeurs", editeurService.findAll());
+        return "jeu/jeuForm";
+    }
+
+    @GetMapping("/jeu/modifier/{sId}")
+    public String modifierJeu(Model model, @PathVariable String sId) {
+        Long id = Long.parseLong(sId);
+        Jeu jeu = jeuService.findById(id);
+        model.addAttribute("jeu", jeu);
         model.addAttribute("types", typeService.findAll());
         model.addAttribute("genres", genreService.findAll());
         model.addAttribute("themes", themeService.findAll());

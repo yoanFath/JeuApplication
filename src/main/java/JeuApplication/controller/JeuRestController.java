@@ -82,7 +82,6 @@ public class JeuRestController {
     @PostMapping(value = {"ajouter"})
     public ResponseEntity addJeu(@RequestBody Jeu jeu){
         jeuService.save(jeu);
-
         return ResponseEntity.ok("Jeu ajoutée");
     }
 }

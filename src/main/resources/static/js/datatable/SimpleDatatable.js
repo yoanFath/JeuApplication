@@ -13,10 +13,10 @@ function creerSimpleDatatable(lien){
         "columns": [
             {"data": "nom_"+lien},
             {"data": function(data){
-                    return "<input type='button' value='Modifier' onclick='updateEntity(" + '"' + lien + '"' + "," + data.id + ",\"PROUT\"" +")'>"
+                    return "<button type='button' onclick='updateEntity(" + '"' + lien + '"' + "," + data.id + ",\"PROUT\"" +")'>Modifier</button>"
                 }},
             {"data": function(data){
-                    return "<input type='button' value='Supprimer' onclick='deleteEntity(" + '"' + lien + '"' + "," + data.id + ")'>"
+                    return "<button type='button' class='red' onclick='deleteEntity(" + '"' + lien + '"' + "," + data.id + ")'>Supprimer</button>"
                 }}
 
         ]
@@ -24,24 +24,27 @@ function creerSimpleDatatable(lien){
 }
 
 function updateEntity(lien, id, newName) {
-    $.ajax({
-        type:"POST",
-        url: "http://localhost:8080/api/" + lien + "/modifier/" + id,
-        data: newName,
-        success:function (responsedata) {
-            table.ajax.reload();
-            alert(responsedata);
-        }
-    })
+    const url = '/api/' + lien + '/modifier/' + id;
+    $('.alert').addClass('hidden');
+    $.post(url, newName, function() {
+        table.ajax.reload();
+        $('.alert-success').find('span').html('Votre modification a bien été sauvegardée');
+        $('.alert-success').removeClass('hidden');
+    }).fail(function() {
+        $('.alert-danger').find('span').html('Votre modification a échoué, veuillez réessayer');
+        $('.alert-danger').removeClass('hidden');
+    });
 }
 
 function deleteEntity(lien, id) {
-    $.ajax({
-        type:"POST",
-        url: "http://localhost:8080/api/" + lien + "/delete/" + id,
-        success:function (responsedata) {
-            table.ajax.reload();
-            alert(responsedata);
-        }
-    })
+    const url = '/api/' + lien + '/delete/' + id;
+    $('.alert').addClass('hidden');
+    $.post(url, {}, function() {
+        table.ajax.reload();
+        $('.alert-success').find('span').html('Votre suppression a bien été effectuée');
+        $('.alert-success').removeClass('hidden');
+    }).fail(function() {
+        $('.alert-danger').find('span').html('Votre suppression a échoué, veuillez réessayer');
+        $('.alert-danger').removeClass('hidden');
+    });
 }

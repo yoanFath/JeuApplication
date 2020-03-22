@@ -12,4 +12,10 @@ public class ThemeController {
         model.addAttribute("entite", "theme");
         return "simpleEntity";
     }
+
+    @GetMapping("/theme/ajouter")
+    public String addTheme(Model model) {
+        model.addAttribute("entite", "theme");
+        return "simpleEntityForm";
+    }
 }

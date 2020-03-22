@@ -12,4 +12,10 @@ public class TypeController {
         model.addAttribute("entite", "type");
         return "simpleEntity";
     }
+
+    @GetMapping("/type/ajouter")
+    public String addType(Model model) {
+        model.addAttribute("entite", "type");
+        return "simpleEntityForm";
+    }
 }

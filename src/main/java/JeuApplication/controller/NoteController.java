@@ -38,23 +38,25 @@ public class NoteController {
         Genre genre = genreService.findById(jeudao.getGenreId());
 
         Integer ageMin = jeudao.getAge_minimum() == 0 ? null : jeudao.getAge_minimum();
-        Integer nbJMin = jeudao.getNombre_joueurs_minimum() == 0 ? null : jeudao.getNombre_joueurs_minimum();
-        Integer nbJMax = jeudao.getNombre_joueurs_maximum() == 0 ? null : jeudao.getNombre_joueurs_maximum();
+        System.out.println(ageMin);
+
+        Integer nbJMin = jeudao.getNombre_joueurs_minimum();
+        Integer nbJMax = jeudao.getNombre_joueurs_maximum();
+        System.out.println(nbJMin);
+        System.out.println(nbJMax);
         List<Jeu> jeux;
         NoteDAO temp;
-        if (type == null && editeur == null && theme == null && genre == null && ageMin == null && nbJMax == null && nbJMin == null) {
-            jeux = jeuService.findAll();
-        } else {
-            jeux = jeuService.findjeuxWithFilter(type, genre, theme, nbJMin,
-                    nbJMax, ageMin, editeur);
-        }
+
+        jeux = jeuService.findjeuxWithFilter(type, genre, theme, nbJMin,
+                nbJMax, ageMin, editeur);
+
         for (Jeu jeu : jeux) {
             temp = new NoteDAO(jeu.getNom_jeu(), jeu.getEditeur().getNom_editeur(), jeu.getTheme().getNom_theme(), jeu.getType().getNom_type(),
                     jeu.getGenre().getNom_genre(), NoteService.getNote(jeu.getListeNote()));
             res.add(temp);
         }
 
-        model.addAttribute("noteDao",res);
+        model.addAttribute("noteDao", res);
         return "note/all";
     }
 }

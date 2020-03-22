@@ -16,39 +16,60 @@
 <div th:replace="fragments/header :: header"></div>
 <div class="main-content">
     <div class="form">
-        <h1>Ajouter un jeu :</h1>
-
-        <div class="alert alert-success hidden" role="alert">
-            <span>Votre jeu a bien été ajouté</span>
+        <div th:if="${jeu == null}">
+            <h1>Ajouter un jeu :</h1>
         </div>
+        <!-- ELSE -->
+        <div th:unless="${jeu == null}">
+            <h1 th:text="'Modifier le jeu '+  ${jeu.id}"></h1>
+        </div>
+        <div th:if="${jeu == null}">
+            <div class="alert alert-success hidden" role="alert">
+                <span>Votre jeu a bien été ajouté</span>
+            </div>
+        </div>
+        <!-- ELSE -->
+        <div th:unless="${jeu == null}">
+            <div class="alert alert-success hidden" role="alert">
+                <span>Votre jeu a bien été modifié</span>
+            </div>
+        </div>
+
 
         <div class="alert alert-danger hidden" role="alert">
             <span>Une erreur est surevenue, veuillez réessayer</span>
         </div>
 
-        <input type="text" name="nom_jeu" placeholder="nom du jeu">
-        <input type="number" name="nombre_joueurs_minimum" placeholder="nombre de joueurs minimum" step="1" min="1">
-        <input type="number" name="nombre_joueurs_maximum" placeholder="nombre de joueurs maximum" step="1" min="1">
-        <input type="number" name="age_minimum" placeholder="âge minimum conseillé" step="1" min="1">
+        <input type="text" name="nom_jeu" th:value="${jeu?.nom_jeu}"  placeholder="nom du jeu">
+        <input type="number" name="nombre_joueurs_minimum" th:value="${jeu?.nombre_joueurs_minimum}" placeholder="nombre de joueurs minimum" step="1" min="1">
+        <input type="number" name="nombre_joueurs_maximum" th:value="${jeu?.nombre_joueurs_maximum}" placeholder="nombre de joueurs maximum" step="1" min="1">
+        <input type="number" name="age_minimum" th:value="${jeu?.age_minimum}"  placeholder="âge minimum conseillé" step="1" min="1">
         <select name="id_editeur" id="editeur">
             <option disabled selected value>Choisir un éditeur</option>
-            <option th:each="editeur : ${editeurs}" th:value="${editeur.id}" th:text="${editeur.nom_editeur}"></option>
+            <option th:each="editeur : ${editeurs}" th:value="${editeur.id}" th:selected="${jeu?.editeur}"  th:text="${editeur.nom_editeur}"></option>
         </select>
         <select name="id_genre" id="genre">
             <option disabled selected value>Choisir un genre</option>
-            <option th:each="genre : ${genres}" th:value="${genre.id}" th:text="${genre.nom_genre}"></option>
+            <option th:each="genre : ${genres}" th:value="${genre.id}" th:selected="${jeu?.genre}"  th:text="${genre.nom_genre}"></option>
         </select>
         <select name="id_type" id="type">
             <option disabled selected value>Choisir un type</option>
-            <option th:each="type : ${types}" th:value="${type.id}" th:text="${type.nom_type}"></option>
+            <option th:each="type : ${types}" th:value="${type.id}" th:selected="${jeu?.type}"  th:text="${type.nom_type}"></option>
         </select>
         <select name="id_theme" id="theme">
             <option disabled selected value>Choisir un thème</option>
-            <option th:each="theme : ${themes}" th:value="${theme.id}" th:text="${theme.nom_theme}"></option>
+            <option th:each="theme : ${themes}" th:value="${theme.id}" th:selected="${jeu?.theme}"  th:text="${theme.nom_theme}"></option>
         </select>
 
         <div class="buttons">
-            <button type="button" id="ajouter" th:attr="data-url='/api/jeu/ajouter'">Ajouter</button>
+            <div th:if="${jeu == null}">
+                <button type="button" id="ajouter" th:attr="data-url='/api/jeu/ajouter'">Ajouter</button>
+            </div>
+            <!-- ELSE -->
+            <div th:unless="${jeu == null}">
+                <button type="button" id="ajouter" th:attr="data-url='/api/jeu/modifier/' +${jeu?.id}">Modifier</button>
+            </div>
+
         </div>
     </div>
 </div>

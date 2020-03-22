@@ -40,11 +40,14 @@ public class JeuController {
     }
 
     @GetMapping("/jeu/modifier/{sId}")
-    public String modifierJeu(Model model,@PathVariable String sId) {
-            Long id = Long.parseLong(sId);
-            Jeu jeu = jeuService.findById(id);
-            model.addAttribute("jeu",jeu);
-
+    public String modifierJeu(Model model, @PathVariable String sId) {
+        Long id = Long.parseLong(sId);
+        Jeu jeu = jeuService.findById(id);
+        model.addAttribute("jeu", jeu);
+        model.addAttribute("types", typeService.findAll());
+        model.addAttribute("genres", genreService.findAll());
+        model.addAttribute("themes", themeService.findAll());
+        model.addAttribute("editeurs", editeurService.findAll());
         return "jeu/jeuForm";
     }
 }

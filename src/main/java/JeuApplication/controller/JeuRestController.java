@@ -93,6 +93,33 @@ public class JeuRestController {
         }
     }
 
+    @PostMapping(value = {"modifier/{id}"})
+    public ResponseEntity modifierJeu(@RequestBody JeuDAO jeudao,@PathVariable Long id){
+        Jeu jeu = jeuService.findById(id);
+
+        Type type = typeService.findById(jeudao.getTypeId());
+        Editeur editeur = editeurService.findById(jeudao.getEditeurId());
+        Theme theme = themeService.findById(jeudao.getThemeId());
+        Genre genre = genreService.findById(jeudao.getGenreId());
+
+        if (jeudao.getNom_jeu() == null || jeudao.getNom_jeu().length() == 0 || theme == null|| type == null ||
+                editeur== null || genre==null){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erreur dans le formulaire !");
+        }else{
+            jeu.setNom_jeu(jeudao.getNom_jeu());
+            jeu.setAge_minimum(jeudao.getAge_minimum());
+            jeu.setNombre_joueurs_minimum(jeudao.getNombre_joueurs_minimum());
+            jeu.setNombre_joueurs_maximum(jeudao.getNombre_joueurs_maximum());
+            jeu.setEditeur(editeur);
+            jeu.setType(type);
+            jeu.setTheme(theme);
+            jeu.setGenre(genre);
+
+            jeuService.save(jeu);
+            return ResponseEntity.ok("Jeu modifié");
+        }
+    }
+
     @GetMapping(value = {"get/{sId}"})
     public ResponseEntity getJeu(@PathVariable String sId){
         try{

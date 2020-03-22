@@ -33,7 +33,9 @@ public class GenreController {
     public String getEntity(@PathVariable String sId, Model model) {
         Long id = Long.parseLong(sId);
         Genre genre = genreService.findById(id);
-        model.addAttribute("genre", genre);
+        model.addAttribute("currentName", genre.getNom_genre());
+        model.addAttribute("entiteId", genre.getId());
+        model.addAttribute("entite", "genre");
         return "simpleEntityForm";
     }
 }

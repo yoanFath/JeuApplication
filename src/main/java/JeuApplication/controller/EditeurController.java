@@ -34,7 +34,9 @@ public class EditeurController {
     public String getEntity(@PathVariable String sId, Model model) {
         Long id = Long.parseLong(sId);
         Editeur editeur = editeurService.findById(id);
-        model.addAttribute("editeur", editeur);
+        model.addAttribute("currentName", editeur.getNom_editeur());
+        model.addAttribute("entiteId", editeur.getId());
+        model.addAttribute("entite", "editeur");
         return "simpleEntityForm";
     }
 }

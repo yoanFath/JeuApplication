@@ -71,11 +71,13 @@ header a:hover {
     display: flex;
     height: 38px;
     align-items: center;
+    justify-content: center;
     padding: 0 20px;
     border-radius: 4px;
     cursor: pointer;
     user-select: none;
     border: none;
+    width: 150px;
 }
 
 .main-content a.button.red, .main-content button.red {

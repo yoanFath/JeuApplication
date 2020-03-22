@@ -33,7 +33,9 @@ public class TypeController {
     public String getEntity(@PathVariable String sId, Model model) {
         Long id = Long.parseLong(sId);
         Type type = typeService.findById(id);
-        model.addAttribute("type", type);
+        model.addAttribute("currentName", type.getNom_type());
+        model.addAttribute("entiteId", type.getId());
+        model.addAttribute("entite", "type");
         return "simpleEntityForm";
     }
 }

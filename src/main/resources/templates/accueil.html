@@ -22,19 +22,19 @@
                 <input type="number" name="nombre_joueurs_minimum" placeholder="nombre de joueurs" step="1" min="1">
                 <input type="hidden" name="nombre_joueurs_maximum" placeholder="nombre de joueurs" step="1" min="1">
                 <input type="number" name="age_minimum" placeholder="âge du plus jeune joueur" step="1" min="0">
-                <select name="editeur" id="editeur">
+                <select name="editeurId" id="editeur">
                     <option selected value>Choisir un éditeur</option>
                     <option th:each="editeur : ${editeurs}" th:value="${editeur.id}" th:text="${editeur.nom_editeur}"></option>
                 </select>
-                <select name="genre" id="genre">
+                <select name="genreId" id="genre">
                     <option selected value>Choisir un genre</option>
                     <option th:each="genre : ${genres}" th:value="${genre.id}" th:text="${genre.nom_genre}"></option>
                 </select>
-                <select name="type" id="type">
+                <select name="typeId" id="type">
                     <option selected value>Choisir un type</option>
                     <option th:each="type : ${types}" th:value="${type.id}" th:text="${type.nom_type}"></option>
                 </select>
-                <select name="theme" id="theme">
+                <select name="themeId" id="theme">
                     <option selected value>Choisir un thème</option>
                     <option th:each="theme : ${themes}" th:value="${theme.id}" th:text="${theme.nom_theme}"></option>
                 </select>

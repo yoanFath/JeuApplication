@@ -49,12 +49,16 @@ $(function () {
                 },
                 {
                     "data": function (data) {
-                        return "<button type='button' class='red' onclick='deleteEntityGame(" + data.id + ")'>Supprimer</button>"
+                        return "<button type='button' class='red delete' data-id='"+ data.id +"'>Supprimer</button>"
                     }
                 }
             ]
         });
     }
+
+    $(document).on('click', 'button.delete', function() {
+        deleteEntityGame($(this).data('id'));
+    });
 
     function deleteEntityGame(id) {
         const url = '/api/jeu/delete/' + id;

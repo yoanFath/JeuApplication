@@ -5,7 +5,9 @@ $(function() {
 
     $(document).on('click', 'button[type="submit"]', function(event) {
         event.preventDefault();
-        $('input[name="age_minimum"]').val(100000);
+        if($('input[name="age_minimum"]').val().length === 0) {
+                $('input[name="age_minimum"]').val(100000);
+        }
         $(this).parents('form').first().submit();
     });
 });

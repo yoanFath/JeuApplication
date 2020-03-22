@@ -27,8 +27,8 @@ public abstract class SimpleController<T extends SimpleEntity> {
         return ResponseEntity.ok("Entité ajoutée");
     }
 
-    @PostMapping(value = {"delete"})
-    public ResponseEntity deleteEntity(@RequestBody String sId){
+    @PostMapping(value = {"delete/{sId}"})
+    public ResponseEntity deleteEntity(@PathVariable String sId){
         try{
             Long id = Long.parseLong(sId);
             System.out.println(id);

@@ -5,9 +5,13 @@ import JeuApplication.service.NoteService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @SpringBootTest
 class JeuApplicationTests {
 	private Jeu jeu;
+	private ArrayList<Note> reviews;
 
 	public JeuApplicationTests() {
 		jeu = new Jeu();
@@ -20,6 +24,7 @@ class JeuApplicationTests {
 		jeu.getGenre().setNom_genre("test");
 		jeu.getEditeur().setNom_editeur("test");
 		jeu.getType().setNom_type("test");
+		reviews = new ArrayList<>();
 	}
 
 	@Test
@@ -33,7 +38,8 @@ class JeuApplicationTests {
 		review.setNote(5);
 		review.setJeu(jeu);
 		jeu.getTheme().setNom_theme("science-fiction");
-		assert NoteService.getNote(review) == 6;
+		reviews.add(review);
+		assert NoteService.getNote(reviews) == 6;
 	}
 
 	@Test
@@ -48,7 +54,9 @@ class JeuApplicationTests {
 		review1.setJeu(jeu);
 		jeu.getTheme().setNom_theme("science-fiction");
 		jeu.getType().setNom_type("jeu de cartes");
-		assert NoteService.getNote(review, review1) == 5;
+		reviews.add(review);
+		reviews.add(review1);
+		assert NoteService.getNote(reviews) == 5;
 	}
 
 	@Test
@@ -68,6 +76,9 @@ class JeuApplicationTests {
 		jeu.getTheme().setNom_theme("science-fiction");
 		jeu.getType().setNom_type("jeu de cartes");
 		jeu.getEditeur().setNom_editeur("édijeu");
-		assert NoteService.getNote(review, review1, review2) == 4;
+		reviews.add(review);
+		reviews.add(review1);
+		reviews.add(review2);
+		assert NoteService.getNote(reviews) == 4;
 	}
 }

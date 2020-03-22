@@ -37,6 +37,7 @@ public abstract class SimpleController<T extends SimpleEntity> {
             if(o == null){
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Entité non trouvé, vérifiez que l'id correspond");
             }
+            deleteJeu(o);
             service.delete(id);
 
             return ResponseEntity.ok("Entité supprimée");
@@ -70,4 +71,6 @@ public abstract class SimpleController<T extends SimpleEntity> {
     protected abstract T setName(String name, T o);
 
     protected abstract T createEntity();
+
+    protected abstract void deleteJeu(T o);
 }

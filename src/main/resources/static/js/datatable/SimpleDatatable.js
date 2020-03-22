@@ -13,17 +13,26 @@ function creerSimpleDatatable(lien){
         "columns": [
             {"data": "nom_"+lien},
             {"data": function(data){
-                    // TODO appel ajax on click avec une image ou jsp
-                    return "appeler : api/"+lien+"/modifier/" + data.id + " avec le nom dans le body";
+                    return "<input type='button' value='Modifier' onclick='updateEntity(" + '"' + lien + '"' + "," + data.id + ",\"PROUT\"" +")'>"
                 }},
             {"data": function(data){
-                    // TODO appel ajax on click avec une image ou jsp
-                    //return "appeler api/"+ lien +"/delete/" + data.id;
-                    return "<input type='button' onclick='deleteEntity(" + lien + "," + data.id + ")'>"
+                    return "<input type='button' value='Supprimer' onclick='deleteEntity(" + '"' + lien + '"' + "," + data.id + ")'>"
                 }}
 
         ]
     });
+}
+
+function updateEntity(lien, id, newName) {
+    $.ajax({
+        type:"POST",
+        url: "http://localhost:8080/api/" + lien + "/modifier/" + id,
+        data: newName,
+        success:function (responsedata) {
+            table.ajax.reload();
+            alert(responsedata);
+        }
+    })
 }
 
 function deleteEntity(lien, id) {
@@ -31,6 +40,7 @@ function deleteEntity(lien, id) {
         type:"POST",
         url: "http://localhost:8080/api/" + lien + "/delete/" + id,
         success:function (responsedata) {
+            table.ajax.reload();
             alert(responsedata);
         }
     })

@@ -1,3 +1,7 @@
+.hidden {
+    display: none;
+}
+
 header {
     background-color: #326690;
     display: flex;
@@ -58,10 +62,10 @@ header a:hover {
 .main-content .buttons {
     display: flex;
     justify-content: flex-end;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
-.main-content a.button {
+.main-content a.button, .main-content button {
     color: white;
     background-color: #326690;
     display: flex;
@@ -71,9 +75,32 @@ header a:hover {
     border-radius: 4px;
     cursor: pointer;
     user-select: none;
+    border: none;
+}
+
+.main-content a.button.red, .main-content button.red {
+    background-color: red;
 }
 
 .main-content a.button:hover {
     text-decoration: none;
     color: white;
+}
+
+.form {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.form input, .form select {
+    width: 100%;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 4px;
+    height: 38px;
+    padding: 0 20px;
+    margin-bottom: 15px;
+}
+
+.form button[type=submit] {
+    margin-top: 20px;
 }

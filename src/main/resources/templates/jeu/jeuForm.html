@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Jeux de société</title>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+</head>
+
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="main-content">
+    <div class="form">
+        <h1>Ajouter un jeu :</h1>
+
+        <div class="alert alert-success hidden" role="alert">
+            <span>Votre jeu a bien été ajouté</span>
+        </div>
+
+        <div class="alert alert-danger hidden" role="alert">
+            <span>Une erreur est surevenue, veuillez réessayer</span>
+        </div>
+
+        <input type="text" name="nom_jeu" placeholder="nom du jeu">
+        <input type="number" name="nombre_joueurs_minimum" placeholder="nombre de joueurs minimum" step="1" min="1">
+        <input type="number" name="nombre_joueurs_maximum" placeholder="nombre de joueurs maximum" step="1" min="1">
+        <input type="number" name="age_minimum" placeholder="âge minimum conseillé" step="1" min="1">
+        <select name="id_editeur" id="editeur">
+            <option disabled selected value>Choisir un éditeur</option>
+            <option th:each="editeur : ${editeurs}" th:value="${editeur.id}" th:text="${editeur.nom_editeur}"></option>
+        </select>
+        <select name="id_genre" id="genre">
+            <option disabled selected value>Choisir un genre</option>
+            <option th:each="genre : ${genres}" th:value="${genre.id}" th:text="${genre.nom_genre}"></option>
+        </select>
+        <select name="id_type" id="type">
+            <option disabled selected value>Choisir un type</option>
+            <option th:each="type : ${types}" th:value="${type.id}" th:text="${type.nom_type}"></option>
+        </select>
+        <select name="id_theme" id="theme">
+            <option disabled selected value>Choisir un thème</option>
+            <option th:each="theme : ${themes}" th:value="${theme.id}" th:text="${theme.nom_theme}"></option>
+        </select>
+
+        <div class="buttons">
+            <button type="button" id="ajouter" th:attr="data-url='/api/jeu/ajouter'">Ajouter</button>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" th:src="@{/js/jeuForm.js}"></script>
+</body>
+</html>

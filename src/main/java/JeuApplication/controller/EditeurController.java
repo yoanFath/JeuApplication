@@ -12,4 +12,10 @@ public class EditeurController {
         model.addAttribute("entite", "editeur");
         return "simpleEntity";
     }
+
+    @GetMapping("/editeur/ajouter")
+    public String addEditeur(Model model) {
+        model.addAttribute("entite", "editeur");
+        return "simpleEntityForm";
+    }
 }

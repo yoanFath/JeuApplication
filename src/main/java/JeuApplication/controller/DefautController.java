@@ -31,6 +31,6 @@ public class DefautController {
         model.addAttribute("genres", genreService.findAll());
         model.addAttribute("themes", themeService.findAll());
         model.addAttribute("editeurs", editeurService.findAll());
-        return "filtre";
+        return "accueil";
     }
 }

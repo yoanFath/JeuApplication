@@ -44,7 +44,7 @@ public class JeuRestController {
         Editeur editeur = editeurService.findById(jeudao.getEditeurId());
         Theme theme = themeService.findById(jeudao.getThemeId());
         Genre genre = genreService.findById(jeudao.getGenreId());
-        System.out.println("JEUDAO " + jeudao);
+        System.out.println("JEUDAO " + jeudao + " " + jeudao.getGenreId());
         Integer ageMin = jeudao.getAge_minimum() == 0 ? null : jeudao.getAge_minimum();
         Integer nbJMin = jeudao.getNombre_joueurs_minimum()== 0 ? null : jeudao.getNombre_joueurs_minimum();
         Integer nbJMax = jeudao.getNombre_joueurs_maximum()== 0 ? null : jeudao.getNombre_joueurs_maximum();
@@ -52,6 +52,11 @@ public class JeuRestController {
         System.out.println(" liste param : " + type + " "+ editeur + " "+ theme + " "+ genre + " "
                 + ageMin + " " + nbJMin + " "
                 + nbJMax + " ");
+
+        if(type == null && editeur== null && theme== null && genre== null && ageMin== null && nbJMax== null && nbJMin== null ){
+            return jeuService.findAll();
+        }
+
         return jeuService.findjeuxWithFilter(type, genre, theme, nbJMin,
                 nbJMax, ageMin, editeur);
     }

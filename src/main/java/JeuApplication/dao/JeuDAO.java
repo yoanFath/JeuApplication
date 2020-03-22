@@ -1,14 +1,25 @@
 package JeuApplication.dao;
 
-public class JeuDAO {
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class JeuDAO {
+    @JsonProperty("userId")
     private String nom_jeu;
+    @JsonProperty("editeurId")
     private Long editeurId;
+    @JsonProperty("themeId")
     private Long themeId;
+    @JsonProperty("typeId")
     private Long typeId;
+    @JsonProperty("genreId")
     private Long genreId;
+    @JsonProperty("nombre_joueurs_maximum")
     private int nombre_joueurs_maximum;
+    @JsonProperty("nombre_joueurs_minimum")
     private int nombre_joueurs_minimum;
+    @JsonProperty("age_minimum")
     private int age_minimum;
 
     public Long getEditeurId() {

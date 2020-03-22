@@ -47,7 +47,7 @@ public class JeuService {
     }
 
     public List<Jeu> findjeuxWithFilter(Type type, Genre genre, Theme theme, Integer nombre_joueurs_minimum, Integer nombre_joueurs_maximum, Integer age_minimum, Editeur editeur){
-        return jeuRepository.findJeux(type, genre, theme, nombre_joueurs_minimum, nombre_joueurs_maximum, age_minimum, editeur);
+        return jeuRepository.findJeuxByTypeAndGenreAndThemeAndNombreJoueursMinimumAndNombreJoueursMaximumAndAgeMinimumAndEditeur(type, genre, theme, nombre_joueurs_minimum, nombre_joueurs_maximum, age_minimum, editeur);
     }
 
 

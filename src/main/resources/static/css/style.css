@@ -1,0 +1,79 @@
+header {
+    background-color: #326690;
+    display: flex;
+    padding: 0 50px;
+}
+
+header a {
+    padding: 20px 10px;
+    color: white;
+    transition: all 0.2s ease-in-out;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+header a:hover {
+    text-decoration: none;
+    color: white;
+    background-color: #37709e;
+}
+
+#navigation {
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+#navigation .links {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+#navigation .links a {
+    flex: 1;
+    color: black;
+    font-size: 17px;
+    padding: 10px 0;
+    transition: all 0.2s ease-in-out;
+    text-align: center;
+    font-weight: bold;
+}
+
+#navigation .links a:hover {
+    text-decoration: none;
+    color: black;
+    background-color: rgba(0,0,0,0.1);
+}
+
+.main-content {
+    padding: 50px 50px;
+}
+
+.main-content h1 {
+    margin-bottom: 50px;
+    font-size: 22px;
+}
+
+.main-content .buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
+.main-content a.button {
+    color: white;
+    background-color: #326690;
+    display: flex;
+    height: 38px;
+    align-items: center;
+    padding: 0 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.main-content a.button:hover {
+    text-decoration: none;
+    color: white;
+}

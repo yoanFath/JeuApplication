@@ -3,18 +3,20 @@ package JeuApplication.service;
 import JeuApplication.entity.Jeu;
 import JeuApplication.entity.Note;
 
+import java.util.List;
+
 public class NoteService {
     /***
      * Calcul de la note
      * @param reviews review d'un testeur
      * @return Note pondérée
      */
-    public static double getNote(Note... reviews) {
+    public static double getNote(List<Note> reviews) {
         int cumulNote = 0;
         for (Note review : reviews)
             cumulNote += review.getNote() + updateNoteDidier(review) + updateNoteArmande(review)
                     + updateNoteGaston(review) + updateNoteLiz(review) + updateNoteStefan(review);
-        return cumulNote / reviews.length;
+        return cumulNote / reviews.size();
     }
 
     /**

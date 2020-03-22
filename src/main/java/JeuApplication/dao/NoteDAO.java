@@ -6,23 +6,23 @@ public class NoteDAO {
 
     @JsonProperty("nom_jeu")
     private String nom_jeu;
-    @JsonProperty("id_editeur")
-    private Long editeurId;
-    @JsonProperty("id_theme")
-    private Long themeId;
-    @JsonProperty("id_type")
-    private Long typeId;
-    @JsonProperty("id_genre")
-    private Long genreId;
+    @JsonProperty("nom_editeur")
+    private String nom_editeur;
+    @JsonProperty("nom_theme")
+    private String nom_theme;
+    @JsonProperty("nom_type")
+    private String nom_type;
+    @JsonProperty("nom_genre")
+    private String nom_genre;
     @JsonProperty("note")
     private double note;
 
-    public NoteDAO(String nom_jeu, Long editeurId, Long themeId, Long typeId, Long genreId, double note) {
+    public NoteDAO(String nom_jeu, String nom_editeur, String nom_theme, String nom_type, String nom_genre, double note) {
         this.nom_jeu = nom_jeu;
-        this.editeurId = editeurId;
-        this.themeId = themeId;
-        this.typeId = typeId;
-        this.genreId = genreId;
+        this.nom_editeur = nom_editeur;
+        this.nom_theme = nom_theme;
+        this.nom_type = nom_type;
+        this.nom_genre = nom_genre;
         this.note = note;
     }
 
@@ -34,36 +34,36 @@ public class NoteDAO {
         this.nom_jeu = nom_jeu;
     }
 
-    public Long getEditeurId() {
-        return editeurId;
+    public String getNom_editeur() {
+        return nom_editeur;
     }
 
-    public void setEditeurId(Long editeurId) {
-        this.editeurId = editeurId;
+    public void setNom_editeur(String nom_editeur) {
+        this.nom_editeur = nom_editeur;
     }
 
-    public Long getThemeId() {
-        return themeId;
+    public String getNom_theme() {
+        return nom_theme;
     }
 
-    public void setThemeId(Long themeId) {
-        this.themeId = themeId;
+    public void setNom_theme(String nom_theme) {
+        this.nom_theme = nom_theme;
     }
 
-    public Long getTypeId() {
-        return typeId;
+    public String getNom_type() {
+        return nom_type;
     }
 
-    public void setTypeId(Long typeId) {
-        this.typeId = typeId;
+    public void setNom_type(String nom_type) {
+        this.nom_type = nom_type;
     }
 
-    public Long getGenreId() {
-        return genreId;
+    public String getNom_genre() {
+        return nom_genre;
     }
 
-    public void setGenreId(Long genreId) {
-        this.genreId = genreId;
+    public void setNom_genre(String nom_genre) {
+        this.nom_genre = nom_genre;
     }
 
     public double getNote() {

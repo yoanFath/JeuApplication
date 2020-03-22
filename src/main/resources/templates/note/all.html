@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Jeux</title>
+
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="main-content">
+    <h1>Liste des jeux filtrés :</h1>
+
+    <div>
+        <table id="notes" class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Editeur</th>
+                <th>Theme</th>
+                <th>Type</th>
+                <th>Genre</th>
+                <th>Moyenne</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="notedao : ${noteDao}">
+                <td th:text="${#strings.capitalize(notedao.nom_jeu)}">Nom</td>
+                <td th:text="${notedao.nom_editeur}">Éditeur</td>
+                <td th:text="${notedao.nom_theme}">Thème</td>
+                <td th:text="${notedao.nom_type}">Type</td>
+                <td th:text="${notedao.nom_genre}">Genre</td>
+                <td th:text="${notedao.note}">Note</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
+
+<script>
+    $(document).ready(function () {
+        $('#notes').DataTable();
+    });
+</script>
+

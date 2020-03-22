@@ -1,7 +1,6 @@
 package JeuApplication.controller;
 
 import JeuApplication.dao.JeuDAO;
-import JeuApplication.dao.NoteDAO;
 import JeuApplication.entity.*;
 import JeuApplication.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -37,33 +35,6 @@ public class JeuRestController {
         return jeuService.findAll();
     }
 
-    @PostMapping("/findWithFilter")
-    public List<NoteDAO> findWithFilter(@RequestBody JeuDAO jeudao) {
-        List<NoteDAO> res = new ArrayList<>();
-
-        Type type = typeService.findById(jeudao.getTypeId());
-        Editeur editeur = editeurService.findById(jeudao.getEditeurId());
-        Theme theme = themeService.findById(jeudao.getThemeId());
-        Genre genre = genreService.findById(jeudao.getGenreId());
-
-        Integer ageMin = jeudao.getAge_minimum() == 0 ? null : jeudao.getAge_minimum();
-        Integer nbJMin = jeudao.getNombre_joueurs_minimum() == 0 ? null : jeudao.getNombre_joueurs_minimum();
-        Integer nbJMax = jeudao.getNombre_joueurs_maximum() == 0 ? null : jeudao.getNombre_joueurs_maximum();
-        List<Jeu> jeux;
-        NoteDAO temp;
-        if (type == null && editeur == null && theme == null && genre == null && ageMin == null && nbJMax == null && nbJMin == null) {
-            jeux = jeuService.findAll();
-        } else {
-            jeux = jeuService.findjeuxWithFilter(type, genre, theme, nbJMin,
-                    nbJMax, ageMin, editeur);
-        }
-        for (Jeu jeu : jeux) {
-            temp = new NoteDAO(jeu.getNom_jeu(), jeu.getEditeur().getId(), jeu.getTheme().getId(), jeu.getType().getId(),
-                    jeu.getGenre().getId(), NoteService.getNote(jeu.getListeNote()));
-            res.add(temp);
-        }
-        return res;
-    }
 
     @PostMapping(value = {"delete/{sId}"})
     public ResponseEntity deleteJeu(@PathVariable String sId) {

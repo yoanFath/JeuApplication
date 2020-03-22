@@ -6,7 +6,11 @@ $(function() {
     $(document).on('click', 'button[type="submit"]', function(event) {
         event.preventDefault();
         if($('input[name="age_minimum"]').val().length === 0) {
-                $('input[name="age_minimum"]').val(100000);
+            $('input[name="age_minimum"]').val(100000);
+        }
+        if($('input[name="nombre_joueurs_minimum"]').val().length === 0) {
+            $('input[name="nombre_joueurs_minimum"]').val(0);
+            $('input[name="nombre_joueurs_maximum"]').val(100000);
         }
         $(this).parents('form').first().submit();
     });

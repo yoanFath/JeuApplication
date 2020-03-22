@@ -19,7 +19,7 @@ public interface JeuRepository extends JpaRepository<Jeu, Long> {
 
     @Query("SELECT j FROM Jeu j WHERE (:type is null or j.type = :type) and " +
             "(:genre is null or j.genre = :genre) and (:theme is null or j.theme = :theme) and " +
-            "(:nombre_joueurs_minimum is null or j.nombre_joueurs_minimum = :nombreJoueursMinimum) and " +
+            "(:nombre_joueurs_minimum is null or j.nombre_joueurs_minimum = :nombre_joueurs_minimum) and " +
             "(:nombre_joueurs_maximum is null or j.nombre_joueurs_maximum = :nombre_joueurs_maximum) and " +
             "(:age_minimum is null or j.age_minimum = :age_minimum) and (:editeur is null or j.editeur = :editeur)")
     List<Jeu> findJeux(

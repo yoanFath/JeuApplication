@@ -1,51 +1,46 @@
 package JeuApplication.dao;
 
-import JeuApplication.entity.Editeur;
-import JeuApplication.entity.Genre;
-import JeuApplication.entity.Theme;
-import JeuApplication.entity.Type;
-
 public class JeuDAO {
 
     private String nom_jeu;
-    private Editeur editeur;
-    private Theme theme;
-    private Type type;
-    private Genre genre;
+    private Long editeurId;
+    private Long themeId;
+    private Long typeId;
+    private Long genreId;
     private int nombre_joueurs_maximum;
     private int nombre_joueurs_minimum;
     private int age_minimum;
 
-    public Editeur getEditeur() {
-        return editeur;
+    public Long getEditeurId() {
+        return editeurId;
     }
 
-    public void setEditeur(Editeur editeur) {
-        this.editeur = editeur;
+    public void setEditeurId(Long editeurId) {
+        this.editeurId = editeurId;
     }
 
-    public Theme getTheme() {
-        return theme;
+    public Long getThemeId() {
+        return themeId;
     }
 
-    public void setTheme(Theme theme) {
-        this.theme = theme;
+    public void setThemeId(Long themeId) {
+        this.themeId = themeId;
     }
 
-    public Type getType() {
-        return type;
+    public Long getTypeId() {
+        return typeId;
     }
 
-    public void setType(Type type) {
-        this.type = type;
+    public void setTypeId(Long typeId) {
+        this.typeId = typeId;
     }
 
-    public Genre getGenre() {
-        return genre;
+    public Long getGenreId() {
+        return genreId;
     }
 
-    public void setGenre(Genre genre) {
-        this.genre = genre;
+    public void setGenreId(Long genreId) {
+        this.genreId = genreId;
     }
 
     public String getNom_jeu() {

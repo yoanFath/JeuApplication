@@ -14,6 +14,9 @@ public class SimpleService<T extends SimpleEntity> {
     }
 
     public T findById(Long id) {
+        if(id == null){
+            return null;
+        }
         return repository.findById(id).orElse(null);
     }
 

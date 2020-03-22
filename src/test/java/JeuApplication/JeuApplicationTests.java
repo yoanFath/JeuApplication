@@ -2,7 +2,6 @@ package JeuApplication;
 
 import JeuApplication.entity.*;
 import JeuApplication.service.NoteService;
-import JeuApplication.service.Review;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -29,15 +28,21 @@ class JeuApplicationTests {
 
 	@Test
 	public void testNoteService1ReviewDidier() {
-		Review review = new Review("Didier Loyal", 5);
+		Note review = new Note();
+		review.setNom_testeur("Didier Loyal");
+		review.setNote(5);
 		jeu.getTheme().setNom_theme("science-fiction");
 		assert NoteService.getNote(jeu, review) == 6;
 	}
 
 	@Test
 	public void testNoteService2ReviewDidierGaston() {
-		Review review = new Review("Didier Loyal", 5);
-		Review review1 = new Review("Gaston Portaleau", 5);
+		Note review = new Note();
+		review.setNom_testeur("Didier Loyal");
+		review.setNote(5);
+		Note review1 = new Note();
+		review1.setNom_testeur("Gaston Portaleau");
+		review1.setNote(5);
 		jeu.getTheme().setNom_theme("science-fiction");
 		jeu.getType().setNom_type("jeu de cartes");
 		assert NoteService.getNote(jeu, review, review1) == 5;
@@ -45,9 +50,15 @@ class JeuApplicationTests {
 
 	@Test
 	public void testNoteService3ReviewDidierGastonLiz() {
-		Review review = new Review("Didier Loyal", 5);
-		Review review1 = new Review("Gaston Portaleau", 5);
-		Review review2 = new Review("Liz Smallhead", 4);
+		Note review = new Note();
+		review.setNom_testeur("Didier Loyal");
+		review.setNote(5);
+		Note review1 = new Note();
+		review1.setNom_testeur("Gaston Portaleau");
+		review1.setNote(5);
+		Note review2 = new Note();
+		review2.setNom_testeur("Liz Smallhead");
+		review2.setNote(4);
 		jeu.getTheme().setNom_theme("science-fiction");
 		jeu.getType().setNom_type("jeu de cartes");
 		jeu.getEditeur().setNom_editeur("édijeu");

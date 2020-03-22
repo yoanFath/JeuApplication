@@ -49,9 +49,6 @@ public class JeuRestController {
         Integer nbJMin = jeudao.getNombre_joueurs_minimum()== 0 ? null : jeudao.getNombre_joueurs_minimum();
         Integer nbJMax = jeudao.getNombre_joueurs_maximum()== 0 ? null : jeudao.getNombre_joueurs_maximum();
 
-        System.out.println(" liste param : " + type + " "+ editeur + " "+ theme + " "+ genre + " "
-                + ageMin + " " + nbJMin + " "
-                + nbJMax + " ");
 
         if(type == null && editeur== null && theme== null && genre== null && ageMin== null && nbJMax== null && nbJMin== null ){
             return jeuService.findAll();
@@ -80,8 +77,19 @@ public class JeuRestController {
     }
 
     @PostMapping(value = {"ajouter"})
-    public ResponseEntity addJeu(@RequestBody Jeu jeu){
-        jeuService.save(jeu);
-        return ResponseEntity.ok("Jeu ajoutée");
+    public ResponseEntity addJeu(@RequestBody JeuDAO jeudao){
+        Type type = typeService.findById(jeudao.getTypeId());
+        Editeur editeur = editeurService.findById(jeudao.getEditeurId());
+        Theme theme = themeService.findById(jeudao.getThemeId());
+        Genre genre = genreService.findById(jeudao.getGenreId());
+
+        if (jeudao.getNom_jeu() == null || jeudao.getNom_jeu().length() == 0 || theme == null|| type == null ||
+                editeur== null || genre==null){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erreur dans le formulaire !");
+        }else{
+            Jeu jeu = new Jeu(jeudao.getNom_jeu(), jeudao.getAge_minimum(),jeudao.getNombre_joueurs_minimum(),jeudao.getNombre_joueurs_maximum(),editeur,type,theme,genre); // COUCOU
+            jeuService.save(jeu);
+            return ResponseEntity.ok("Jeu ajouté");
+        }
     }
 }

@@ -7,6 +7,20 @@ import java.util.Collection;
 @Table(name = "jeu")
 public class Jeu {
 
+    public Jeu(String nom_jeu, int age_minimum, int nombre_joueurs_minimum, int nombre_joueurs_maximum, Editeur editeur, Type type, Theme theme, Genre genre) {
+        this.nom_jeu = nom_jeu;
+        this.age_minimum = age_minimum;
+        this.nombre_joueurs_minimum = nombre_joueurs_minimum;
+        this.nombre_joueurs_maximum = nombre_joueurs_maximum;
+        this.editeur = editeur;
+        this.type = type;
+        this.theme = theme;
+        this.genre = genre;
+    }
+
+    public Jeu(){
+
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "serial")

@@ -1,7 +1,7 @@
 $(function() {
     $(document).on('click', '.form #ajouter', function() {
         const url = $(this).data('url');
-        const request = {
+        const jeudao = {
             'nom_jeu': $('input[name="nom_jeu"]').val(),
             'id_type': $('select[name="id_type"]').val(),
             'id_genre': $('select[name="id_genre"]').val(),
@@ -12,14 +12,27 @@ $(function() {
             'nombre_joueurs_maximum': $('input[name="nombre_joueurs_maximum"]').val()
         };
 
-        console.log(url, request);
+        console.log(url, jeudao);
         $('.alert').addClass('hidden');
 
-        $.post(url, request, function() {
-            $('.alert-success').removeClass('hidden');
-        }).fail(function() {
-            $('.alert-danger').removeClass('hidden');
-        });
+        // $.post(url, request, function() {
+        //
+        // }).fail(function() {
+        //     $('.alert-danger').removeClass('hidden');
+        // });
+
+        $.ajax({
+            url:url,
+            type:"POST",
+            data:JSON.stringify(jeudao),
+            contentType:"application/json; charset=utf-8",
+            success: function(){
+                $('.alert-success').removeClass('hidden');
+            },
+            error: function(){
+                $('.alert-danger').removeClass('hidden');
+            }
+        })
     });
 
     $(document).on('input | change', 'input, select', function() {

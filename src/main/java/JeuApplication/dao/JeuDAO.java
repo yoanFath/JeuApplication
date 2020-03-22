@@ -5,15 +5,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class JeuDAO {
-    @JsonProperty("userId")
+    @JsonProperty("nom_jeu")
     private String nom_jeu;
-    @JsonProperty("editeurId")
+    @JsonProperty("id_editeur")
     private Long editeurId;
-    @JsonProperty("themeId")
+    @JsonProperty("id_theme")
     private Long themeId;
-    @JsonProperty("typeId")
+    @JsonProperty("id_type")
     private Long typeId;
-    @JsonProperty("genreId")
+    @JsonProperty("id_genre")
     private Long genreId;
     @JsonProperty("nombre_joueurs_maximum")
     private int nombre_joueurs_maximum;

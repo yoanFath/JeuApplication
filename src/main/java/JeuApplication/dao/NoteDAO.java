@@ -15,9 +15,9 @@ public class NoteDAO {
     @JsonProperty("id_genre")
     private Long genreId;
     @JsonProperty("note")
-    private String note;
+    private double note;
 
-    public NoteDAO(String nom_jeu, Long editeurId, Long themeId, Long typeId, Long genreId, String note) {
+    public NoteDAO(String nom_jeu, Long editeurId, Long themeId, Long typeId, Long genreId, double note) {
         this.nom_jeu = nom_jeu;
         this.editeurId = editeurId;
         this.themeId = themeId;
@@ -66,11 +66,11 @@ public class NoteDAO {
         this.genreId = genreId;
     }
 
-    public String getNote() {
+    public double getNote() {
         return note;
     }
 
-    public void setNote(String note) {
+    public void setNote(double note) {
         this.note = note;
     }
 }

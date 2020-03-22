@@ -59,7 +59,7 @@ public class JeuRestController {
         }
         for (Jeu jeu : jeux) {
             temp = new NoteDAO(jeu.getNom_jeu(), jeu.getEditeur().getId(), jeu.getTheme().getId(), jeu.getType().getId(),
-                    jeu.getGenre().getId(), NoteService.getNote(jeu.getListeNote().toArray()));
+                    jeu.getGenre().getId(), NoteService.getNote(jeu.getListeNote()));
             res.add(temp);
         }
         return res;

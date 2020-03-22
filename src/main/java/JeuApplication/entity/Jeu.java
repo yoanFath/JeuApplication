@@ -1,7 +1,7 @@
 package JeuApplication.entity;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "jeu")
@@ -57,7 +57,7 @@ public class Jeu {
     private Genre genre;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "jeu")
-    private Collection<Note> listeNote;
+    private List<Note> listeNote;
 
     public Long getId() {
         return id;
@@ -107,11 +107,11 @@ public class Jeu {
         this.genre = genre;
     }
 
-    public Collection<Note> getListeNote() {
+    public List<Note> getListeNote() {
         return listeNote;
     }
 
-    public void setListeNote(Collection<Note> listeNote) {
+    public void setListeNote(List<Note> listeNote) {
         this.listeNote = listeNote;
     }
 

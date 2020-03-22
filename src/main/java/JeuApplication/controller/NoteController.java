@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class NoteController {
 
-    @GetMapping("/jeu")
-    public String getJeux(Model model) {
+    @GetMapping("/note")
+    public String getNote(Model model) {
         return "note/all";
     }
 }

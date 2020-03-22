@@ -1,6 +1,6 @@
 package JeuApplication.service;
 
-import JeuApplication.entity.Jeu;
+import JeuApplication.entity.*;
 import JeuApplication.repository.JeuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,4 +24,27 @@ public class JeuService {
     public List<Jeu> findAll(){
         return jeuRepository.findAll();
     }
+
+    public Jeu findById(Long id) {
+        return jeuRepository.findById(id).orElse(null);
+    }
+
+    public void delete(Long id){
+        jeuRepository.deleteById(id);
+    }
+
+    public List<Jeu> findByTheme(Theme theme){
+        return jeuRepository.findByTheme(theme);
+    }
+    public List<Jeu> findByGenre(Genre genre){
+        return jeuRepository.findByGenre(genre);
+    }
+    public List<Jeu> findByType(Type type){
+        return jeuRepository.findByType(type);
+    }
+    public List<Jeu> findByEditeur(Editeur editeur){
+        return jeuRepository.findByEditeur(editeur);
+    }
+
+
 }

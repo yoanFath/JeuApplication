@@ -27,6 +27,8 @@
         <input class="form-control col-sm-2 ml-1" type="text" id="editeur" name="editeur" placeholder="editeur">
     </div>
 
+    <button id="addJeu" type="button" class="btn btn-secondary">Ajouter un jeu</button>
+
     <div class="col-sm-12">
         <table id="example" class="table table-striped table-bordered ">
             <thead>
@@ -93,6 +95,23 @@
             table.column(0).search($("#nom_jeu").val()).draw();
         });
 
+        $('#addJeu').click(function(e) {
+            e.preventDefault(); // avoid to execute the actual submit of the form.
+
+            var form = $(this);
+            var url = form.attr('action');
+
+            $.ajax({
+                type: "POST",
+                url: "/api/jeu/ajouter",
+                data: form.serialize(), // serializes the form's elements.
+                success: function(data)
+                {
+                    alert(data); // show response from the php script.
+                }
+            });
+
+        });
     });
 
 

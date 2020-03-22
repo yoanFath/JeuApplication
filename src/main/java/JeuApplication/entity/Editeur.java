@@ -15,7 +15,7 @@ public class Editeur extends SimpleEntity{
     private String nom_editeur;
 
     @JsonBackReference
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "editeur")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "editeur", cascade = CascadeType.REMOVE)
     @Fetch(value= FetchMode.SELECT)
     private Collection<Jeu> listeJeu;
 

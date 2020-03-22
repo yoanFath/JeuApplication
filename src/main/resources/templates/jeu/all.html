@@ -36,6 +36,11 @@
                 <th>Editeur</th>
                 <th>Theme</th>
                 <th>Type</th>
+                <th>Age min</th>
+                <th>Nb joueur min</th>
+                <th>Nb joueur max</th>
+                <th>Modifier</th>
+                <th>Supprimer</th>
             </tr>
             </thead>
 
@@ -63,6 +68,17 @@
                 {"data": "editeur.nom_editeur"},
                 {"data": "theme.nom_theme"},
                 {"data": "type.nom_type"},
+                {"data": "age_minimum"},
+                {"data": "nombre_joueurs_minimum"},
+                {"data": "nombre_joueurs_maximum"},
+                {"data": function(data){
+                        // TODO appel ajax on click avec une image ou jsp
+                        return "appeler : api/jeu/modifier/" + data.id + " avec le nom dans le body";
+                    }},
+                {"data": function(data){
+                        // TODO appel ajax on click avec une image ou jsp
+                        return "appeler api/jeu/delete/" + data.id;
+                    }}
             ]
         });
 

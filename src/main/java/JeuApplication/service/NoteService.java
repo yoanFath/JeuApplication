@@ -16,7 +16,7 @@ public class NoteService {
         for (Note review : reviews)
             cumulNote += review.getNote() + updateNoteDidier(review) + updateNoteArmande(review)
                     + updateNoteGaston(review) + updateNoteLiz(review) + updateNoteStefan(review);
-        return cumulNote / reviews.size();
+        return reviews.size() == 0 ? 0 : cumulNote / reviews.size();
     }
 
     /**

@@ -23,7 +23,8 @@ $(function() {
         {"data": "nombre_joueurs_maximum"},
         {
           "data": function (data) {
-            return "<button type='button' onclick='updateEntity()'>Modifier</button>"
+
+            return "<a href='/jeu/modifier/"+data.id+"' type='button' class='button' onclick='updateEntity()'>Modifier</a>"
           }
         },
         {

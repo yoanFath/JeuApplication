@@ -1,6 +1,7 @@
 package JeuApplication.controller;
 
 import JeuApplication.dao.JeuDAO;
+import JeuApplication.dao.NoteDAO;
 import JeuApplication.entity.*;
 import JeuApplication.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -36,65 +38,70 @@ public class JeuRestController {
     }
 
     @PostMapping("/findWithFilter")
-    public List<Jeu> findWithFilter(@RequestBody JeuDAO jeudao) {
-        System.out.println(jeudao.toString());
-        System.out.println(jeudao.getNombre_joueurs_minimum());
+    public List<NoteDAO> findWithFilter(@RequestBody JeuDAO jeudao) {
+        List<NoteDAO> res = new ArrayList<>();
 
         Type type = typeService.findById(jeudao.getTypeId());
         Editeur editeur = editeurService.findById(jeudao.getEditeurId());
         Theme theme = themeService.findById(jeudao.getThemeId());
         Genre genre = genreService.findById(jeudao.getGenreId());
-        System.out.println("JEUDAO " + jeudao + " " + jeudao.getGenreId());
+
         Integer ageMin = jeudao.getAge_minimum() == 0 ? null : jeudao.getAge_minimum();
-        Integer nbJMin = jeudao.getNombre_joueurs_minimum()== 0 ? null : jeudao.getNombre_joueurs_minimum();
-        Integer nbJMax = jeudao.getNombre_joueurs_maximum()== 0 ? null : jeudao.getNombre_joueurs_maximum();
-
-
-        if(type == null && editeur== null && theme== null && genre== null && ageMin== null && nbJMax== null && nbJMin== null ){
-            return jeuService.findAll();
+        Integer nbJMin = jeudao.getNombre_joueurs_minimum() == 0 ? null : jeudao.getNombre_joueurs_minimum();
+        Integer nbJMax = jeudao.getNombre_joueurs_maximum() == 0 ? null : jeudao.getNombre_joueurs_maximum();
+        List<Jeu> jeux;
+        NoteDAO temp;
+        if (type == null && editeur == null && theme == null && genre == null && ageMin == null && nbJMax == null && nbJMin == null) {
+            jeux = jeuService.findAll();
+        } else {
+            jeux = jeuService.findjeuxWithFilter(type, genre, theme, nbJMin,
+                    nbJMax, ageMin, editeur);
         }
-
-        return jeuService.findjeuxWithFilter(type, genre, theme, nbJMin,
-                nbJMax, ageMin, editeur);
+        for (Jeu jeu : jeux) {
+            temp = new NoteDAO(jeu.getNom_jeu(), jeu.getEditeur().getId(), jeu.getTheme().getId(), jeu.getType().getId(),
+                    jeu.getGenre().getId(), NoteService.getNote(jeu.getListeNote().toArray()));
+            res.add(temp);
+        }
+        return res;
     }
 
     @PostMapping(value = {"delete/{sId}"})
-    public ResponseEntity deleteJeu(@PathVariable String sId){
-        try{
+    public ResponseEntity deleteJeu(@PathVariable String sId) {
+        try {
             Long id = Long.parseLong(sId);
             System.out.println(id);
             Jeu o = jeuService.findById(id);
-            if(o == null){
+            if (o == null) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Jeu non trouvé, vérifiez que l'id correspond");
             }
             jeuService.delete(id);
 
             return ResponseEntity.ok("Jeu supprimé");
-        }catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Seul l'id doit etre envoyé dans le body.");
 
         }
     }
 
     @PostMapping(value = {"ajouter"})
-    public ResponseEntity addJeu(@RequestBody JeuDAO jeudao){
+    public ResponseEntity addJeu(@RequestBody JeuDAO jeudao) {
         Type type = typeService.findById(jeudao.getTypeId());
         Editeur editeur = editeurService.findById(jeudao.getEditeurId());
         Theme theme = themeService.findById(jeudao.getThemeId());
         Genre genre = genreService.findById(jeudao.getGenreId());
 
-        if (jeudao.getNom_jeu() == null || jeudao.getNom_jeu().length() == 0 || theme == null|| type == null ||
-                editeur== null || genre==null){
+        if (jeudao.getNom_jeu() == null || jeudao.getNom_jeu().length() == 0 || theme == null || type == null ||
+                editeur == null || genre == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erreur dans le formulaire !");
-        }else{
-            Jeu jeu = new Jeu(jeudao.getNom_jeu(), jeudao.getAge_minimum(),jeudao.getNombre_joueurs_minimum(),jeudao.getNombre_joueurs_maximum(),editeur,type,theme,genre); // COUCOU
+        } else {
+            Jeu jeu = new Jeu(jeudao.getNom_jeu(), jeudao.getAge_minimum(), jeudao.getNombre_joueurs_minimum(), jeudao.getNombre_joueurs_maximum(), editeur, type, theme, genre); // COUCOU
             jeuService.save(jeu);
             return ResponseEntity.ok("Jeu ajouté");
         }
     }
 
     @PostMapping(value = {"modifier/{id}"})
-    public ResponseEntity modifierJeu(@RequestBody JeuDAO jeudao,@PathVariable Long id){
+    public ResponseEntity modifierJeu(@RequestBody JeuDAO jeudao, @PathVariable Long id) {
         Jeu jeu = jeuService.findById(id);
 
         Type type = typeService.findById(jeudao.getTypeId());
@@ -102,10 +109,10 @@ public class JeuRestController {
         Theme theme = themeService.findById(jeudao.getThemeId());
         Genre genre = genreService.findById(jeudao.getGenreId());
 
-        if (jeudao.getNom_jeu() == null || jeudao.getNom_jeu().length() == 0 || theme == null|| type == null ||
-                editeur== null || genre==null){
+        if (jeudao.getNom_jeu() == null || jeudao.getNom_jeu().length() == 0 || theme == null || type == null ||
+                editeur == null || genre == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erreur dans le formulaire !");
-        }else{
+        } else {
             jeu.setNom_jeu(jeudao.getNom_jeu());
             jeu.setAge_minimum(jeudao.getAge_minimum());
             jeu.setNombre_joueurs_minimum(jeudao.getNombre_joueurs_minimum());
@@ -121,17 +128,17 @@ public class JeuRestController {
     }
 
     @GetMapping(value = {"get/{sId}"})
-    public ResponseEntity getJeu(@PathVariable String sId){
-        try{
+    public ResponseEntity getJeu(@PathVariable String sId) {
+        try {
             Long id = Long.parseLong(sId);
             Jeu o = jeuService.findById(id);
 
-            if(o == null){
+            if (o == null) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Jeu non trouvé, vérifiez que l'id correspond");
             }
 
             return ResponseEntity.ok(o);
-        }catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Seul l'id doit etre envoyé dans le body.");
 
         }

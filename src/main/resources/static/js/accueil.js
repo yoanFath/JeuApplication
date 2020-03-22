@@ -9,8 +9,8 @@ $(function() {
             $('input[name="age_minimum"]').val(100000);
         }
         if($('input[name="nombre_joueurs_minimum"]').val().length === 0) {
-            $('input[name="nombre_joueurs_minimum"]').val(0);
-            $('input[name="nombre_joueurs_maximum"]').val(100000);
+            $('input[name="nombre_joueurs_minimum"]').val(100000);
+            $('input[name="nombre_joueurs_maximum"]').val(0);
         }
         $(this).parents('form').first().submit();
     });

@@ -13,7 +13,7 @@ function creerSimpleDatatable(lien){
         "columns": [
             {"data": "nom_"+lien},
             {"data": function(data){
-                    return "<button type='button' onclick='updateEntity(" + '"' + lien + '"' + "," + data.id + ",\"PROUT\"" +")'>Modifier</button>"
+                    return "<a class='button' href='/"+ lien +"/get/" + data.id + "'>Modifier</a>"
                 }},
             {"data": function(data){
                     return "<button type='button' class='red' onclick='deleteEntity(" + '"' + lien + '"' + "," + data.id + ")'>Supprimer</button>"

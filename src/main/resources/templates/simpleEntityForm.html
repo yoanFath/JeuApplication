@@ -16,19 +16,24 @@
 <div th:replace="fragments/header :: header"></div>
 <div class="main-content">
     <div class="form">
-        <h1 th:text="'Ajouter un ' + ${entite}"></h1>
+        <h1 th:text="'Ajouter un ' + ${entite}" th:if="${currentName == null}"></h1>
+        <h1 th:text="'Modifier un ' + ${entite}" th:unless="${currentName == null}"></h1>
 
         <div class="alert alert-success hidden" role="alert">
-            <span th:text="'Vous avez ajouté un ' + ${entite}"></span>
+            <span th:text="'Vous avez ajouté un ' + ${entite}" th:if="${currentName == null}"></span>
+            <span th:text="'Vous avez ajouté un ' + ${entite}" th:unless="${currentName == null}"></span>
         </div>
 
         <div class="alert alert-danger hidden" role="alert">
-            <span>Une erreur est surevenue, veuillez réessayer</span>
+            <span>Une erreur est survenue, veuillez réessayer</span>
         </div>
 
-        <input type="text" name="name" placeholder="Saisir un nom">
-        <div class="buttons">
+        <input type="text" name="name" placeholder="Saisir un nom" th:value="${currentName}">
+        <div class="buttons" th:if="${currentName == null}">
             <button type="button" id="ajouter" th:attr="data-url='/api/' + ${entite} + '/ajouter'">Ajouter</button>
+        </div>
+        <div class="buttons" th:unless="${currentName == null}">
+            <button type="button" id="ajouter" th:attr="data-url='/api/' + ${entite} + '/modifier/' + ${entiteId}">Modifier</button>
         </div>
     </div>
 </div>

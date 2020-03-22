@@ -33,7 +33,9 @@ public class ThemeController {
     public String getEntity(@PathVariable String sId, Model model) {
         Long id = Long.parseLong(sId);
         Theme theme = themeService.findById(id);
-        model.addAttribute("theme", theme);
+        model.addAttribute("currentName", theme.getNom_theme());
+        model.addAttribute("entiteId", theme.getId());
+        model.addAttribute("entite", "theme");
         return "simpleEntityForm";
     }
 }

@@ -21,7 +21,7 @@
                 <input type="text" name="name" placeholder="nom du jeu">
                 <input type="number" name="nombre_joueurs_minimum" placeholder="nombre de joueurs" step="1" min="1">
                 <input type="hidden" name="nombre_joueurs_maximum" placeholder="nombre de joueurs" step="1" min="1">
-                <input type="number" name="age_minimum" placeholder="âge minimum conseillé" step="1" min="1">
+                <input type="number" name="age_minimum" placeholder="âge du plus jeune joueur" step="1" min="0">
                 <select name="editeur" id="editeur">
                     <option selected value>Choisir un éditeur</option>
                     <option th:each="editeur : ${editeurs}" th:value="${editeur.id}" th:text="${editeur.nom_editeur}"></option>

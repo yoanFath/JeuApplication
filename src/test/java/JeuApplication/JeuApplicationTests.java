@@ -31,8 +31,9 @@ class JeuApplicationTests {
 		Note review = new Note();
 		review.setNom_testeur("Didier Loyal");
 		review.setNote(5);
+		review.setJeu(jeu);
 		jeu.getTheme().setNom_theme("science-fiction");
-		assert NoteService.getNote(jeu, review) == 6;
+		assert NoteService.getNote(review) == 6;
 	}
 
 	@Test
@@ -40,12 +41,14 @@ class JeuApplicationTests {
 		Note review = new Note();
 		review.setNom_testeur("Didier Loyal");
 		review.setNote(5);
+		review.setJeu(jeu);
 		Note review1 = new Note();
 		review1.setNom_testeur("Gaston Portaleau");
 		review1.setNote(5);
+		review1.setJeu(jeu);
 		jeu.getTheme().setNom_theme("science-fiction");
 		jeu.getType().setNom_type("jeu de cartes");
-		assert NoteService.getNote(jeu, review, review1) == 5;
+		assert NoteService.getNote(review, review1) == 5;
 	}
 
 	@Test
@@ -53,15 +56,18 @@ class JeuApplicationTests {
 		Note review = new Note();
 		review.setNom_testeur("Didier Loyal");
 		review.setNote(5);
+		review.setJeu(jeu);
 		Note review1 = new Note();
 		review1.setNom_testeur("Gaston Portaleau");
 		review1.setNote(5);
+		review1.setJeu(jeu);
 		Note review2 = new Note();
 		review2.setNom_testeur("Liz Smallhead");
 		review2.setNote(4);
+		review2.setJeu(jeu);
 		jeu.getTheme().setNom_theme("science-fiction");
 		jeu.getType().setNom_type("jeu de cartes");
 		jeu.getEditeur().setNom_editeur("édijeu");
-		assert NoteService.getNote(jeu, review, review1, review2) == 4;
+		assert NoteService.getNote(review, review1, review2) == 4;
 	}
 }
